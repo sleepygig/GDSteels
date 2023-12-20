@@ -44,7 +44,6 @@ def Edit(request, key):
         
         updated_entry = {}
         
-        # Check each field for updates and populate the updated_entry dictionary
         if data.get('Item_name'):
             updated_entry['Item_name'] = data.get('Item_name')
         else:
@@ -80,17 +79,11 @@ def Update_stock(request,key):
     if request.method == 'POST':
         data = request.POST
         a=data.get('quantity')
-
         current_stockpile = db.reference(key).child('StockPile').get()
         if current_stockpile is not None:
-    # Convert 'a' and current stockpile to integers, add them, and convert back to string
             updated_stockpile = str(int(current_stockpile) + int(a))
-
-    # Update the 'StockPile' attribute with the new value
         db.reference(key).child('StockPile').set(updated_stockpile)
-        
-        return redirect('/')  
-        
+        return redirect('/')     
     return render(request, 'gds/update_sp.html')
     
 
