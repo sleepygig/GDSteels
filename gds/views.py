@@ -85,7 +85,7 @@ def Edit(request, key):
             updated_entry['StockPile'] = entry.get('StockPile')
         
         ref.update(updated_entry)  # Update the entry at the specified key
-        return redirect('/')  # Redirect to some URL after the update
+        return redirect('home')  # Redirect to some URL after the update
         
     return render(request, 'gds/edit.html')
 
@@ -93,7 +93,7 @@ def Edit(request, key):
 def Delete(request,key):
     ref = db.reference(key)
     ref.delete() 
-    return redirect('/')
+    return redirect('home')
 
 
 
@@ -107,13 +107,16 @@ def Update_stock(request,key):
         if current_stockpile is not None:
             updated_stockpile = str(int(current_stockpile) + int(a))
         db.reference(key).child('StockPile').set(updated_stockpile)
-        return redirect('/')     
+        return redirect('home')     
     return render(request, 'gds/update_sp.html')
     
 
 
     
-
+def Logout(request):
+    # Your logic to retrieve data or perform other operations goes here
+    
+    return redirect('')
 
 
 
