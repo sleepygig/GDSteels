@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-4" style="max-width: 400px; margin: 0 auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="mb-4">Update Stock Pile</h2>
+        <div class="mb-3">
+            <label for="Quantity" class="form-label" style="font-weight: bold;">Quantity</label>
+            <input type="number" value="{{ Rec.quantity }}" name="quantity" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Add Entry</button>
+    </form>
+</div>
+
+{% endblock %}
