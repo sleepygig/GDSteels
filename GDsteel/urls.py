@@ -18,14 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from gds import views
 from gds.views import *
+# from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', Add),
-    path('home/', home,name='home'),
-    path('',Add),
+    path('home/', Add,name='home'),
+    path('',Pass),
     path('delete_entry/<str:key>/', Delete),
     path('edit_entry/<str:key>/', Edit),
-    path('add_entry/<str:key>/', Update_stock)
+    path('add_entry/<str:key>/', Update_stock),
+    
         
 ]

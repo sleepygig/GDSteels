@@ -16,9 +16,31 @@ ref = db.reference(app=app)
 def home(request):
     messages.success(request, 'This is a popup message.')
     return render(request, 'gds/update_sp.html')    
-  
+ 
+from django.shortcuts import render
+
+from django.shortcuts import redirect, render
+
+def Pass(request):
+    incorrect_password = False  
+
+    if request.method == 'POST':
+        data = request.POST
+        entered_pass = data.get('Security_Pin')
+        print(entered_pass)
+        if entered_pass != '1234':
+            incorrect_password = True 
+        else:
+            return redirect('home')  
+    return render(request, 'gds/pass.html', {'incorrect_password': incorrect_password})
+
+
+    
+    
 def Add(request):
     if request.method =='POST':
+        #print("Hekko") intial load pr post req nahi 
+        #hoga sirf render hoga website
         data = request.POST
         new_entry = {
             'Item_name': data.get('Item_name'),
@@ -26,9 +48,7 @@ def Add(request):
             'Date': data.get('entry_date'),
             'StockPile': data.get('stock_pile')
         }
-        ref.push(new_entry)
-        
-        
+        ref.push(new_entry)    
     d =ref.get()
     context={'d' :d}
     return render(request, 'gds/home.html',context)
@@ -74,6 +94,10 @@ def Delete(request,key):
     ref = db.reference(key)
     ref.delete() 
     return redirect('/')
+
+
+
+    
 
 def Update_stock(request,key):
     if request.method == 'POST':

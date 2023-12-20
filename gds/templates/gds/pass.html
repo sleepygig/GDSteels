@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-4" style="max-width: 400px; margin: 0 auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="mb-4">Update Inventory Entry</h2>
+
+        {% if incorrect_password %}
+            <div id="error-message" class="alert alert-danger" role="alert" style="margin-bottom: 15px;">
+                <strong>Error:</strong> Incorrect Security Pin. Please try again.
+            </div>
+        {% endif %}
+      
+        <div class="mb-3">
+            <label for="Security Pin" class="form-label" style="font-weight: bold;">Security Pin</label>
+            <input type="text" value="{{ Rec.StockPile }}" name="Security_Pin" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to hide the error message after 5 seconds
+    setTimeout(function() {
+        var errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 2000); 
+</script>
+
+
+{% endblock %}
