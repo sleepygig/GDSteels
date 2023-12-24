@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'GDsteel.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+LOGIN_URL = '/login/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
