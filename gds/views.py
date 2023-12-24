@@ -22,36 +22,44 @@ from django.shortcuts import render
 from django.shortcuts import redirect, render
 
 def Pass(request):
+    print("pass")
     incorrect_password = False  
-
     if request.method == 'POST':
         data = request.POST
         entered_pass = data.get('Security_Pin')
         print(entered_pass)
         if entered_pass != '1234':
-            incorrect_password = True 
+            incorrect_password = True
+            return render(request, 'gds/pass.html', {'incorrect_password': incorrect_password})
         else:
-            return redirect('home')  
+            referrer = request.META.get('HTTP_REFERER')
+            if referrer:
+                return redirect('home')
+            # else:
+            #     return render(request, 'gds/home.html')
     return render(request, 'gds/pass.html', {'incorrect_password': incorrect_password})
-
-
-    
-    
-def Add(request):
+  
+def Add(request): 
     if request.method =='POST':
-        #print("Hekko") intial load pr post req nahi 
-        #hoga sirf render hoga website
         data = request.POST
         new_entry = {
             'Item_name': data.get('Item_name'),
             'quantity': data.get('quantity'),
             'Date': data.get('entry_date'),
-            'StockPile': data.get('stock_pile')
-        }
+            'StockPile': data.get('stock_pile')}
         ref.push(new_entry)    
     d =ref.get()
-    context={'d' :d}
-    return render(request, 'gds/home.html',context)
+    print("ADD")
+    referrer = request.META.get('HTTP_REFERER')
+    if referrer:
+        context={'d' :d}
+        return render(request, 'gds/home.html',context)
+    else :
+        return render(request, 'gds/pass.html',
+                      {'incorrect_password': True})
+
+    
+    
 
 
 
@@ -115,7 +123,7 @@ def Update_stock(request,key):
     
 def Logout(request):
     # Your logic to retrieve data or perform other operations goes here
-    
+    # print()
     return redirect('')
 
 

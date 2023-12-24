@@ -1,17 +1,3 @@
-
-.container {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-/* Style the form labels */
-.form-label {
-    font-weight: bold;
-}
-
-/* Style the submit button */
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+.container.mt-5 {
+    background-color: red;
 }
